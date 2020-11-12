@@ -13,11 +13,15 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
-import { formatDate, LocalStorage } from 'tubular-common';
+import { LocalStorage } from 'tubular-common';
 import { Paginator, SearchTextInput } from '../../src';
 import CustomHttpClient from './CustomHttpClient';
 import columns from './data/columns';
 import { useTbTable } from 'tubular-react-common';
+
+import DateFnsAdapter from '@date-io/date-fns';
+
+const dateFns = new DateFnsAdapter();
 
 const styles: any = {
     progress: {
@@ -62,7 +66,7 @@ const RemoteGridList: React.FunctionComponent = () => {
                                                     </Typography>
                                                     <Typography component="p">{row.ShipperCity}</Typography>
                                                     <Typography component="p">
-                                                        {formatDate(row.ShippedDate, 'M/d/yyyy h:mm a')}
+                                                        {dateFns.format(row.ShippedDate, 'fullDateTime')}
                                                     </Typography>
                                                 </CardContent>
                                                 <CardActions>

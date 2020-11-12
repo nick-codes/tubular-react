@@ -2,17 +2,20 @@ import TableCell from '@material-ui/core/TableCell';
 import CheckBox from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 import * as React from 'react';
-import { ColumnDataType, ColumnModel, formatDate, getColumnAlign } from 'tubular-common';
+import { ColumnDataType, ColumnModel, getColumnAlign } from 'tubular-common';
+import DateFnsAdapter from '@date-io/date-fns';
+
+const dateFns = new DateFnsAdapter();
 
 export const renderCellContent: any = (column: ColumnModel, row: any) => {
     switch (column.dataType) {
         case ColumnDataType.Numeric:
             return row[column.name] || 0;
         case ColumnDataType.Date:
-            return formatDate(row[column.name]);
+            return dateFns.format(row[column.name], 'fullDate');
         case ColumnDataType.DateTime:
         case ColumnDataType.DateTimeUtc:
-            return formatDate(row[column.name], 'M/d/yyyy h:mm a');
+            return dateFns.format(row[column.name], 'fullDateTime');
         case ColumnDataType.Boolean:
             return row[column.name] === true ? <CheckBox /> : <CheckBoxOutlineBlank />;
         default:

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import CheckBox from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 import * as React from 'react';
-import { ColumnModel, formatDate } from 'tubular-common';
+import { ColumnModel } from 'tubular-common';
 import { FixedLinearProgress } from 'uno-material-ui/dist/FixedLinearProgress';
 import { useResolutionSwitch } from 'uno-react/lib/hooks/useResolutionSwitch';
 import { TbRowProps } from '../../src/BareBones/TbRow';
@@ -20,12 +20,15 @@ import { Paginator } from '../../src/Pagination';
 import sampleColumns from './data/columns';
 import localData from './data/localData';
 import { useTbTable } from 'tubular-react-common';
+import DateFnsAdapter from '@date-io/date-fns';
+
+const dateFns = new DateFnsAdapter();
 
 const CustomTbRow: React.FunctionComponent<TbRowProps> = ({ row, onRowClick }: TbRowProps) => (
     <TableRow hover={true} key={row.OrderID} onClick={onRowClick}>
         <TableCell padding="default">{row.OrderID} </TableCell>
         <TableCell padding="default">{row.CustomerName} </TableCell>
-        <TableCell padding="default">{formatDate(row.ShippedDate, 'M/d/yyyy h:mm a')}</TableCell>
+        <TableCell padding="default">{dateFns.format(row.ShippedDate, 'fullDateTime')}</TableCell>
         <TableCell padding="default">{row.ShipperCity}</TableCell>
         <TableCell padding="default" align={'right'}>
             {row.Amount || 0}

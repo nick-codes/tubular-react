@@ -26,7 +26,7 @@ const getFilterText = (column: ColumnModel) => {
     if (column.filterOperator === CompareOperators.Between) {
         let argument = column.filterArgument[0];
         if (isDate) {
-            argument = convertToFriendlyDateString(argument);
+            argument = convertToFriendlyDateString(argument as string);
         }
         return `${filterText} - ${argument}`;
     }
