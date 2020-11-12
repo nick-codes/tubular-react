@@ -13,9 +13,11 @@ exports.renderCellContent = function (column, row) {
         case tubular_common_1.ColumnDataType.Numeric:
             return row[column.name] || 0;
         case tubular_common_1.ColumnDataType.Date:
+            console.log('formatDate(', row[column.name], ')');
             return dateFns.format(row[column.name], 'fullDate');
         case tubular_common_1.ColumnDataType.DateTime:
         case tubular_common_1.ColumnDataType.DateTimeUtc:
+            console.log('formatDateTime(', row[column.name], ')');
             return dateFns.format(row[column.name], 'fullDateTime');
         case tubular_common_1.ColumnDataType.Boolean:
             return row[column.name] === true ? React.createElement(CheckBox_1.default, null) : React.createElement(CheckBoxOutlineBlank_1.default, null);

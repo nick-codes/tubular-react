@@ -12,9 +12,11 @@ export const renderCellContent: any = (column: ColumnModel, row: any) => {
         case ColumnDataType.Numeric:
             return row[column.name] || 0;
         case ColumnDataType.Date:
+             console.log('formatDate(', row[column.name], ')');
             return dateFns.format(row[column.name], 'fullDate');
         case ColumnDataType.DateTime:
         case ColumnDataType.DateTimeUtc:
+             console.log('formatDateTime(', row[column.name], ')');
             return dateFns.format(row[column.name], 'fullDateTime');
         case ColumnDataType.Boolean:
             return row[column.name] === true ? <CheckBox /> : <CheckBoxOutlineBlank />;
